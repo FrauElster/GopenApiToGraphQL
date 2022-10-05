@@ -1,0 +1,25 @@
+# this spec was generated at {{ .GenerationTime }}
+{{if .Scalars}}
+# Scalars
+{{range .Scalars}}scalar {{.Name}}
+{{end}}{{end}}
+{{if .Types}}# Types
+{{range .Types}}type {{.Name}} { {{range .Attributes}}
+    {{.Name}}: {{.Type}}{{if .IsRequired}}!{{end}}{{end}}
+}
+
+{{end}}{{end}}
+{{if .Queries}}# Queries
+type Query { {{range .Queries}}
+    # from {{.Origin}}
+    {{.Name}}{{if .Parameters}}({{range $index, $element := .Parameters}}{{if $index}}, {{end}}{{$element.Name}}: {{$element.Type}}{{if $element.IsRequired}}!{{end}}{{end}}){{end}}{{if .ReturnType}}: {{.ReturnType}}{{end}}
+{{end}}}
+{{end}}
+{{if .Mutations}}# Mutations
+type Mutation {
+{{range .Mutations}}    # from {{.Origin}}
+    {{.Name}}{{if .Parameters}}({{range $index, $element := .Parameters}}{{if $index}}, {{end}}{{$element.Name}}: {{$element.Type}}{{if $element.IsRequired}}!{{end}}{{end}}){{end}}{{if .ReturnType}}: {{.ReturnType}}{{end}}
+{{end}}}
+{{end}}
+
+
