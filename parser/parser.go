@@ -2,8 +2,8 @@ package parser
 
 import (
 	"fmt"
+	"github.com/FrauElster/gopenApiToGraphQL/util"
 	"github.com/getkin/kin-openapi/openapi3"
-	"oasToGraphql/util"
 )
 
 func Parse(doc *openapi3.T) (GqlSpec, error) {

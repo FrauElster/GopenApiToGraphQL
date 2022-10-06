@@ -3,9 +3,9 @@ package parser
 import (
 	"errors"
 	"fmt"
+	"github.com/FrauElster/gopenApiToGraphQL/util"
 	"github.com/getkin/kin-openapi/openapi3"
 	log "github.com/sirupsen/logrus"
-	"oasToGraphql/util"
 	"path/filepath"
 	"regexp"
 	"strconv"

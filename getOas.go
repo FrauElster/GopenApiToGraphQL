@@ -3,9 +3,9 @@ package main
 import (
 	"context"
 	"fmt"
+	"gopenApiToGraphQL/util"
 	"io"
 	"net/http"
-	"oasToGraphql/util"
 	"os"
 	"path"
 	"strings"

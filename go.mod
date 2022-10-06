@@ -1,4 +1,4 @@
-module oasToGraphql
+module github.com/FrauElster/gopenApiToGraphQL
 
 go 1.19
 

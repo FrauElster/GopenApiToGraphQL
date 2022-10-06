@@ -1,4 +1,4 @@
-# GopenApiToGraphQL
+# gopenApiToGraphQL
 
 This project transforms OpenAPI schemas to GraphQL schemas.
 
