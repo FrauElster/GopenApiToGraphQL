@@ -1,12 +1,23 @@
 package parser
 
 import (
+	"context"
 	"fmt"
 	"github.com/FrauElster/gopenApiToGraphQL/util"
 	"github.com/getkin/kin-openapi/openapi3"
 )
 
-func Parse(doc *openapi3.T) (GqlSpec, error) {
+func Parse(oasFile string) (GqlSpec, error) {
+	// parse the file to OAS representation
+	doc, err := openapi3.NewLoader().LoadFromFile(oasFile)
+	if err != nil {
+		return GqlSpec{}, fmt.Errorf("could not parse OAS: %s", err)
+	}
+	err = doc.Validate(context.Background())
+	if err != nil {
+		return GqlSpec{}, fmt.Errorf("invalid OAS: %s", err)
+	}
+
 	// parse types
 	gqlTypes, err := parseSchema(doc)
 	if err != nil {

@@ -4,10 +4,9 @@ import (
 	"context"
 	"flag"
 	"fmt"
-	"github.com/getkin/kin-openapi/openapi3"
+	"github.com/FrauElster/gopenApiToGraphQL/parser"
+	"github.com/FrauElster/gopenApiToGraphQL/util"
 	"log"
-	"oasToGraphql/parser"
-	"oasToGraphql/util"
 	"os"
 )
 
@@ -57,18 +56,8 @@ func main() {
 		log.Fatal(err)
 	}
 
-	// parse the file to OAS representation
-	doc, err := openapi3.NewLoader().LoadFromFile(opts.oasFile)
-	if err != nil {
-		log.Fatalf("could not parse OAS: %s", err)
-	}
-	err = doc.Validate(context.Background())
-	if err != nil {
-		log.Fatalf("invalid OAS: %s", err)
-	}
-
 	// parse OAS to GraphQL
-	gqlSpec, err := parser.Parse(doc)
+	gqlSpec, err := parser.Parse(opts.oasFile)
 	if err != nil {
 		log.Fatalf("parsing err: %s", err)
 	}
