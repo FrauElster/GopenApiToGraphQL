@@ -131,13 +131,13 @@ func parseResponse(oasOperation openapi3.Operation) (string, error) {
 		if err == nil {
 			// okay just because it is a number, doesn't mean it's an HTTP Status code
 			// make a quick and dirty check
-			if !util.IsInSlice(code, util.HttpCodes) {
+			if !util.IsInSlice(code, httpCodes) {
 				// not a http code
 				continue
 			}
 			// now check if the current best match is even an HTTP Status code, if not ours is better
 			currentMatchCode, err := strconv.Atoi(name)
-			if err != nil || !util.IsInSlice(currentMatchCode, util.HttpCodes) {
+			if err != nil || !util.IsInSlice(currentMatchCode, httpCodes) {
 				bestMatch = name
 				continue
 			}

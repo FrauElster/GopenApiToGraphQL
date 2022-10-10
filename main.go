@@ -1,7 +1,6 @@
 package main
 
 import (
-	"context"
 	"flag"
 	"fmt"
 	"github.com/FrauElster/gopenApiToGraphQL/parser"
@@ -17,17 +16,13 @@ type opts struct {
 
 func parseFlags() (opts, error) {
 	// parse oas flag
-	oasRawFile := flag.String("oas", "", "the openapi spec file")
+	oasFile := flag.String("oas", "", "the openapi spec file")
 	gqlRawFile := flag.String("gql", "", "the output file")
 	flag.Parse()
 
 	// check if set
-	if *oasRawFile == "" {
+	if *oasFile == "" {
 		return opts{}, fmt.Errorf("\"oas\" is not set")
-	}
-	oasFile, err := getOas(context.Background(), *oasRawFile)
-	if err != nil {
-		return opts{}, err
 	}
 
 	// check if set
@@ -40,16 +35,10 @@ func parseFlags() (opts, error) {
 		return opts{}, err
 	}
 
-	return opts{oasFile: oasFile, gqlFile: gqlFile}, nil
+	return opts{oasFile: *oasFile, gqlFile: gqlFile}, nil
 }
 
 func main() {
-	// create fresh tmp dir
-	if err := util.Setup(); err != nil {
-		log.Fatal(err)
-	}
-	// defer os.RemoveAll(util.TmpDir)
-
 	// parse flags, this will also download a http oas file to TmpDir
 	opts, err := parseFlags()
 	if err != nil {
